@@ -4,3 +4,93 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* HEADER */
+.recipe-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    height: 80px;
+    background-color: #ffffff;
+}
+
+/* FOOOTER */
+.recipe-footer {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 5px;
+    background-color: #ffffff;
+}
+
+/* RECIPIENTE MAIN */
+.recipe-cell {
+    height: calc(100vh - 140px);
+    background-color: #7FFFD4;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* RECIPIENTE QUADRATI */
+.recipe-squares {
+    height: 600px;
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* QUADRATINI DIFILCOTA' DIFFICILE */
+.cell-difficult {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    border: 1px solid #000000;
+}
+
+/* QUADRATINI DIFILCOTA' DIFFICILE */
+.cell-medium {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+    border: 1px solid #000000;
+}
+
+/* QUADRATINI DIFILCOTA' DIFFICILE */
+.cell-easy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+    border: 1px solid #000000;
+}
+
+/* SELECT */
+#recipe-select {
+    width: 150px;
+    padding: 2px 0px;
+}
+
+/* BOTTONE */
+.recipe-button {
+    padding: 2px 20px;
+}
+
+/* CLICK SULLA CASELLA */
+.color-cell-green {
+    background-color: #adff2f;
+}
+
+.color-cell-red {
+    background-color: #ff0000;
+}
