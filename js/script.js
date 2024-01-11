@@ -18,8 +18,9 @@ const formElement = document.getElementById('form');
 const selectField = document.getElementById('recipe-select');
 const buttonField = document.querySelector('.recipe-button');
 const squaresElement = document.querySelector('.recipe-squares');
+const scoreElement = document.getElementById('score');
 
-console.log(formElement, selectField, buttonField, squaresElement);
+console.log(formElement, selectField, buttonField, squaresElement, scoreElement);
 
 // VARIABILI CHE CONOSCO
 let rows;
@@ -36,6 +37,7 @@ buttonField.innerText = 'Ricomincia'
 
 buttonField.addEventListener('click', ()=>{
     squaresElement.innerText = ''
+    scoreElement.innerText = ''
 })
 
 const difficulty = selectField.value;
@@ -78,6 +80,8 @@ while (arrayBombs.length < bombs) {
 
 console.log('numero bombe: ', arrayBombs);
 
+let score = 0;
+
 for (let i = 1; i <= tot; i++) {
 
 const eventCell = getcellElements(i,difficulty);
@@ -95,6 +99,7 @@ const bombclick = arrayBombs.includes(parseInt(eventCell.innerText))
     } else {
         eventCell.classList.add('color-cell-green')
         console.log(eventCell.innerText);
+        scoreElement.innerText = ++score
     }
 })
 
