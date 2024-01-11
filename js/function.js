@@ -1,7 +1,7 @@
-// FUNZIONE DIFICOLTA DIFFICILE
+// FUNZIONE CELLE 
 const getcellElements = (numberDiffuculty, difficulty) => {
         const node = document.createElement('div');
-        
+
         if (difficulty === '1') {
             node.className = 'cell-difficult';
         } else if (difficulty === '2') {

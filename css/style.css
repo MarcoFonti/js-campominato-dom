@@ -89,6 +89,7 @@
 /* CLICK SULLA CASELLA */
 .color-cell-green {
     background-color: #adff2f;
+    cursor: not-allowed;
 }
 
 .color-cell-red {
