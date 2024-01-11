@@ -48,8 +48,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: calc(100% / 10);
-    height: calc(100% / 10);
+    width: calc(100% / 7);
+    height: calc(100% / 7);
     border: 1px solid #000000;
 }
 
@@ -70,8 +70,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: calc(100% / 7);
-    height: calc(100% / 7);
+    width: calc(100% / 10);
+    height: calc(100% / 10);
     border: 1px solid #000000;
 }
 

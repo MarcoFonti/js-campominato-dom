@@ -51,9 +51,9 @@ const difficulty = selectField.value;
 switch (difficulty) {
 
     case '1' :
-        rows = 3;
-        cols = 3;
-        bombs = 1;
+        rows = 7;
+        cols = 7;
+        bombs = 20;
         break;
     
     case '2':
@@ -63,9 +63,9 @@ switch (difficulty) {
         break;
 
     case '3':
-        rows = 7;
-        cols = 7;
-        bombs = 20;
+        rows = 10;
+        cols = 10;
+        bombs = 16;
         break;
 }
 
