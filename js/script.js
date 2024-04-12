@@ -16,125 +16,208 @@ console.log('JS OK');
 */
 
 
-// RECUPERO ELEMENTI
+/* RECUPERO ELEMENTI */
 const formElement = document.getElementById('form');
 const selectField = document.getElementById('recipe-select');
 const buttonField = document.querySelector('.recipe-button');
 const squaresElement = document.querySelector('.recipe-squares');
 const scoreElement = document.getElementById('score');
 
+
+/* CONTROLLO RISPOSTA */
 console.log(formElement, selectField, buttonField, squaresElement, scoreElement);
 
-// VARIABILI CHE CONOSCO
+
+/* CREO VARIBILE CHE POSSO MANIPOLARE */
 let rows;
 let cols;
 let bombs;
 
-// EVENTO AL CLICK
+
+/* CREO UN EVENTO AL SUMBIT SUL FORM */
 formElement.addEventListener('submit', (e) => {
 
-// BLOCCO LA PAGINA DAL CARICAMENTO
-e.preventDefault();
 
-// CAMBIO TESTO AL BOTTONE 
-buttonField.innerText = 'Ricomincia'
+    /* BLOCCO LA PAGINA DAL CARICAMENTO */
+    e.preventDefault();
 
-// EVENTO AL BOTTONE RICOMINCIA 
-buttonField.addEventListener('click', ()=>{
-    squaresElement.innerText = ''
-})
 
-// RECUPERO VALORI SELECT 
-const difficulty = selectField.value;
+    /* CAMBIO TESTO AL BOTTONE PLAY */
+    buttonField.innerText = 'Ricomincia'
 
-// MODALITA' DI GIOGO 
-switch (difficulty) {
 
-    case '1' :
-        rows = 7;
-        cols = 7;
-        bombs = 20;
-        break;
-    
-    case '2':
-        rows = 9;
-        cols = 9;
-        bombs = 18;
-        break;
+    /* EVENTO AL CLICK SUL BOTTONE  */
+    buttonField.addEventListener('click', () => {
 
-    case '3':
-        rows = 10;
-        cols = 10;
-        bombs = 16;
-        break;
-}
 
-// VARIABILE TOT CELLE 
-const tot = rows * cols
+        /* SE CLICCATO AZZERO IL CONTENUTO CHE ANDRO A METTERE DENTRO (CELLE) */
+        squaresElement.innerText = ''
 
-// VARIABILE MASSIMO DEI PUNTI
-const maxPoints = tot - bombs
+    })
 
-console.log('celle da creare: ', tot);
 
-console.log('difficolta scelta: ', difficulty);
+    /* RECUPERO IL VALUE CHE MI FORNISCE L'UTENTE TRAMITE SELECT */
+    const difficulty = selectField.value;
 
-// CREO BOMBE 
-const arrayBombs = []
 
-while (arrayBombs.length < bombs) {
-    const randomBombs = Math.floor(Math.random()* tot ) + 1
-    if (!arrayBombs.includes(randomBombs)) {
-        arrayBombs.push(randomBombs);
-        
-    }
-}
+    /* CON IL METODO SWITCH POSSO DARE VARI CASI ALLA VARIBILE DIFFICULTY  */
+    switch (difficulty) {
 
-console.log('celle dove sono le bombe: ', arrayBombs);
 
-// INCREMENTO IL PUNTEGGIO 
-let score = 0;
-scoreElement.innerText = score
+        /* MANIPOLO LE VARIBILE PER SVARIATI VALORI */
 
-// CREO LE CELLE 
-for (let i = 1; i <= tot; i++) {
+        case '1':
+            rows = 7;
+            cols = 7;
+            bombs = 20;
+            break;
 
-const eventCell = getcellElements(i,difficulty);
+        case '2':
+            rows = 9;
+            cols = 9;
+            bombs = 18;
+            break;
 
-squaresElement.appendChild(eventCell);
-
-// EVENTO ALLA CASELLA
-eventCell.addEventListener('click', () => {
-
-    // FACCIO IN MODO CHE L'UTENTE NON POSSA RICLICCARE 
-    if (eventCell.classList.contains('clicked')) return;
-
-    eventCell.classList.add('clicked')
-
-    // GUARDO NELLE CASELLA QUALI NUMERI SIANO LE BOMBE 
-    const bombclick = arrayBombs.includes(parseInt(eventCell.innerText));
-
-    // CREO COLORE CELLE E MESSAGGIO SCONFITTA 
-    if (bombclick) {
-        confirm('Hai perso! Hai fatto ' + score + ' puni,  Vuoi riprovare?')
-        eventCell.classList.add('color-cell-red')
-        console.log(eventCell.innerText);
-    } else {
-        eventCell.classList.add('color-cell-green')
-        console.log(eventCell.innerText);
-        scoreElement.innerText = ++score
+        case '3':
+            rows = 10;
+            cols = 10;
+            bombs = 16;
+            break;
     }
 
-    console.log(score);
 
-    // MESSAGGIO DI VITTORIA 
-    if (maxPoints === score) {
-        alert('HAI VINTO!! HAI FATTO ' + score + ' PUNTI');
+
+    /* CREO UNA VARIBILE CHE MI DA IL TOTALE DELLE CELLE */
+    const tot = rows * cols
+
+
+    /* CREO VARIBILE PER PUNTEGGIO DI VINCITA'  */
+    const maxPoints = tot - bombs
+
+
+    /* CONTROLLO RISPOSTA */
+    console.log('celle da creare: ', tot);
+    console.log('difficolta scelta: ', difficulty);
+
+
+
+    /* CREO UN ARRAY IN CUI METTERCI DENTO LE VARIE BOMBE */
+    const arrayBombs = []
+
+
+    /* FINCHE' LA LUNGHEZZA DELL'ARRAY CREAO E' MINORE RIEMPI L'ARRAY   */
+    while (arrayBombs.length < bombs) {
+
+
+        /* CREO NUMERI RANDOM CON UN MASSIMO DI CELLE SELEZIONATE (TOT) */
+        const randomBombs = Math.floor(Math.random() * tot) + 1
+
+
+        /* SE NELL'ARRAY NON E' INCLUSO IL NUMERO RANDOM CREATO */
+        if (!arrayBombs.includes(randomBombs)) {
+
+            /* METTILO DENTRO */
+            arrayBombs.push(randomBombs);
+
+        }
+
     }
 
-})
 
-}
+    /* CONTROLLO RISPOSTA */
+    console.log('celle dove sono le bombe: ', arrayBombs);
+
+
+    /* CREO VARIBILE DA MANIPOLARE */
+    let score = 0;
+
+
+    /* STAMPO IN PAGINA LA VARIBILE */
+    scoreElement.innerText = score
+
+
+    /* CILO SU IL TOTALE DELLE CELLE CHE L'UTENTE SELEZIONA E INCREMENTO DI 1 */
+    for (let i = 1; i <= tot; i++) {
+
+
+        /* ASSEGNO ALLA VARIBILE LA FUNZIONE GETCELLELEMENTS E GLI PASSO COME ARGOMENTI LA I E LA DIFFICOLTA' SCELTA */
+        const eventCell = getcellElements(i, difficulty);
+
+
+        /* AGGIUNGO ALL'EMELENTO SQUERESELEMENTE OGNI SINGOLA CELLA(DIV) CHE CREO (DETTO NODO) */
+        squaresElement.appendChild(eventCell);
+
+
+
+        /* CREO UN EVENTO AL CLICK SULLA SINGOLA CELLA */
+        eventCell.addEventListener('click', () => {
+
+
+            /* SE LA CELLA CONTEINE IL CLICK FACCIO IN MODO CHE L'UTENTE NON POSSA RICLICCARLA */
+            if (eventCell.classList.contains('clicked')) return;
+
+
+            /* AGGIUNGO ALLLA SENGOLA CELLA LA CLASSE CLICKED  */
+            eventCell.classList.add('clicked')
+
+
+            /* CREO UNA VARIBILE IN CUI ASSEGNO SE NELL'ARRAY DELLE BOMBE E' INCLUSO IL NUMERO DELLA CELLA */
+            const bombclick = arrayBombs.includes(parseInt(eventCell.innerText));
+
+
+            /* SE LA VARIBILE VIENE MESSA IN CAUSA */
+            if (bombclick) {
+
+
+                /* CREO MESSAGGIO DI CONFERMA DI FALLIMENTO */
+                confirm('Hai perso! Hai fatto ' + score + ' puni,  Vuoi riprovare?')
+
+
+                /* AGGIUNGO ALLE CELLA CLICCATA UNA CLASSE HTML */
+                eventCell.classList.add('color-cell-red');
+
+
+                /* AZZERO IL CONTENUTO CHE ANDRO A METTERE DENTRO (CELLE) */
+                squaresElement.innerText = ''
+
+
+                /* CONTROLLO RISPOSTA */
+                console.log(eventCell.innerText);
+
+
+                /* ALTRIMENTI */
+            } else {
+
+
+                /* AGGIUNGO ALLE CELLA CLICCATA UNA CLASSE HTML */
+                eventCell.classList.add('color-cell-green')
+
+
+                /* CONTROLLO RISPOSTA */
+                console.log(eventCell.innerText);
+
+
+                /* STAMPO IN PAGINA LA VARIBILE SCORE INCREMENTADO DI 1 */
+                scoreElement.innerText = ++score
+            }
+
+
+            /* CONTROLLO RISPOSTA */
+            console.log(score);
+
+
+            /* SE SE LA VARIABILE MAXPOINTS E' IDENTICA A SCORE */
+            if (maxPoints === score) {
+
+                
+                /* ALERT DI VINCITA' */
+                alert('HAI VINTO!! HAI FATTO ' + score + ' PUNTI');
+
+            }
+
+        })
+
+    }
 
 })
 
