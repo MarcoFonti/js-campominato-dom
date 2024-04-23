@@ -22,7 +22,7 @@ const selectField = document.getElementById('recipe-select');
 const buttonField = document.querySelector('.recipe-button');
 const squaresElement = document.querySelector('.recipe-squares');
 const scoreElement = document.getElementById('score');
-
+const cardElement = document.getElementById('card-not-play')
 
 /* CONTROLLO RISPOSTA */
 console.log(formElement, selectField, buttonField, squaresElement, scoreElement);
@@ -36,6 +36,7 @@ let bombs;
 
 /* CREO UN EVENTO AL SUMBIT SUL FORM */
 formElement.addEventListener('submit', (e) => {
+
 
 
     /* BLOCCO LA PAGINA DAL CARICAMENTO */
@@ -52,6 +53,10 @@ formElement.addEventListener('submit', (e) => {
 
         /* SE CLICCATO AZZERO IL CONTENUTO CHE ANDRO A METTERE DENTRO (CELLE) */
         squaresElement.innerText = ''
+
+
+        /* AGGIUGNO LA CLASSE D-NONE ALLA CARD DEL MESSAGGIO (NON GIOCARE) */
+        cardElement.classList.add('d-none');
 
     })
 
@@ -85,6 +90,11 @@ formElement.addEventListener('submit', (e) => {
             break;
     }
 
+    /* SE ESISTE UNA DIFFICULTA' SCELTA DALL'UTENTE */
+    if (difficulty) {
+        /* AGGINGO UNA CLASSE PER IL COLORE DELLO SFONDO DELLE CELLE */
+        squaresElement.classList.add('color-back')
+    }
 
 
     /* CREO UNA VARIBILE CHE MI DA IL TOTALE DELLE CELLE */
@@ -148,7 +158,6 @@ formElement.addEventListener('submit', (e) => {
         squaresElement.appendChild(eventCell);
 
 
-
         /* CREO UN EVENTO AL CLICK SULLA SINGOLA CELLA */
         eventCell.addEventListener('click', () => {
 
@@ -157,8 +166,11 @@ formElement.addEventListener('submit', (e) => {
             if (eventCell.classList.contains('clicked')) return;
 
 
-            /* AGGIUNGO ALLLA SENGOLA CELLA LA CLASSE CLICKED  */
+            /* AGGIUNGO ALLLA SINGOLA CELLA LA CLASSE CLICKED  */
             eventCell.classList.add('clicked')
+
+            /* AGGIUGNO ALLA CELLA CLICCCATA IL COLORE DEL TESTO NERO */
+            eventCell.classList.add('text-black')
 
 
             /* CREO UNA VARIBILE IN CUI ASSEGNO SE NELL'ARRAY DELLE BOMBE E' INCLUSO IL NUMERO DELLA CELLA */
@@ -170,15 +182,43 @@ formElement.addEventListener('submit', (e) => {
 
 
                 /* CREO MESSAGGIO DI CONFERMA DI FALLIMENTO */
-                confirm('Hai perso! Hai fatto ' + score + ' puni,  Vuoi riprovare?')
+                const result = window.confirm('Hai perso! Hai fatto ' + score + ' punti. Vuoi riprovare?');
+
+                /* SE ESTISTE UN MESSAGGIO DI CONFERMA */
+                if (result) {
 
 
+                    /* RICARICA LA PAGINA */
+                    window.location.reload();
+
+
+                    /* ALTRIMENTI */
+                } else {
+
+
+                    /* RIMUOVI LO SFONDO DELLE CELLE */
+                    squaresElement.classList.remove('color-back')
+
+
+                    /* RIMUOVI LA CALSSE D-NONE ALLA CARD DEL MESSAGGIO (NON GIORARE) */
+                    cardElement.classList.remove('d-none');
+                }
+
+                
                 /* AGGIUNGO ALLE CELLA CLICCATA UNA CLASSE HTML */
                 eventCell.classList.add('color-cell-red');
 
 
                 /* AZZERO IL CONTENUTO CHE ANDRO A METTERE DENTRO (CELLE) */
                 squaresElement.innerText = ''
+
+
+                /* SE PERSO RIASSEGNO LO SCORE A 0 */
+                scoreElement.innerText = 0
+
+
+                /* RIMUOVO AL NUMERO SCORE UNA CLASSE HTML */
+                scoreElement.classList.remove('color-green')
 
 
                 /* CONTROLLO RISPOSTA */
@@ -197,6 +237,10 @@ formElement.addEventListener('submit', (e) => {
                 console.log(eventCell.innerText);
 
 
+                /* AGGIUNGO AL NUMERO SCORE UNA CLASSE HTML */
+                scoreElement.classList.add('color-green')
+
+
                 /* STAMPO IN PAGINA LA VARIBILE SCORE INCREMENTADO DI 1 */
                 scoreElement.innerText = ++score
             }
@@ -209,7 +253,7 @@ formElement.addEventListener('submit', (e) => {
             /* SE SE LA VARIABILE MAXPOINTS E' IDENTICA A SCORE */
             if (maxPoints === score) {
 
-                
+
                 /* ALERT DI VINCITA' */
                 alert('HAI VINTO!! HAI FATTO ' + score + ' PUNTI');
 

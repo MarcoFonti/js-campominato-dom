@@ -10,28 +10,39 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
+    padding: 10px;
     height: 80px;
-    background-color: #ffffff;
+    background-color: #31343B;
+    color: #ffffff;
 }
 
-/* FOOOTER */
-.recipe-footer {
+/* CONTENITORE PUNTEGGGIO */
+.container-score {
+    background-color: #ffffff;
+    color: #31343B;
+    height: 70px;
+    width: 100px;
+    font-size: 50px;
     display: flex;
     align-items: center;
-    height: 60px;
-    padding: 5px;
-    background-color: #ffffff;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+/* COLORE DEL PUNTEGGIO A PARTIRE DA 1 */
+.color-green {
+    color: rgb(64, 235, 64);
 }
 
 /* RECIPIENTE MAIN */
 .recipe-cell {
-    height: calc(100vh - 140px);
-    background-color: #7FFFD4;
+    height: calc(100vh - 80px);
+    background-color: black;
     overflow: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 /* RECIPIENTE QUADRATI */
@@ -40,6 +51,12 @@
     width: 600px;
     display: flex;
     flex-wrap: wrap;
+    color: white;
+}
+
+/* COLORE SFONDO */
+.color-back {
+    background-color: #31343B;
 }
 
 /* QUADRATINI DIFILCOTA' DIFFICILE */
@@ -83,7 +100,8 @@
 
 /* BOTTONE */
 .recipe-button {
-    padding: 2px 20px;
+    padding: 2px 0px;
+    width: 100px;
 }
 
 /* CLICK SULLA CASELLA */
